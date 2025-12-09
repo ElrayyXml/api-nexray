@@ -69,6 +69,8 @@ yarn add @nexray/api
 #### Request
 ```ts
 const nexray = require('@nexray/api');
+or
+import nexray from '@nexray/api';
 
 const data = await nexray.get('/ai/gemini', {
               text: 'Halo apa kabar...'
@@ -85,4 +87,18 @@ const data = await nexray.get('/ai/gemini', {
   "author": "NexRay",
   "result": "Halo! Kabar saya baik, terima kasih telah bertanya. Ada yang bisa saya bantu hari ini?"
 }
+```
+
+#### Request Buffer
+```ts
+const nexray = require('@nexray/api');
+or
+import nexray from '@nexray/api';
+
+const buffer = await nexray.getBuffee('/maker/brat', {
+              text: 'Halo apa kabar...'
+              }
+       );
+       
+       console.log(data)
 ```
