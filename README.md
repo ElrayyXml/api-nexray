@@ -12,7 +12,7 @@
 
 <p><em>Api NexRay</em></p>
 
-<img src="https://files.catbox.moe/7m4cuw.jpg" width="300" alt="Cover Banner" />
+<img src="https://files.catbox.moe/84up1c.jpg" width="300" alt="Cover Banner" />
 
 </div>
 
@@ -22,8 +22,6 @@
 
 [![npm version](https://img.shields.io/npm/v/@nexray/api.svg)](https://www.npmjs.com/package/@nexray/api)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![WhatsApp](https://img.shields.io/badge/WhatsApp-API-green.svg?logo=whatsapp)](https://whatsapp.com)
-[![Node.js](https://img.shields.io/badge/Node.js-20%2B-green.svg)](https://nodejs.org)
 [![npm downloads](https://img.shields.io/npm/dt/@nexray/api.svg?color=blueviolet&label=Downloads&logo=npm)](https://www.npmjs.com/package/@nexray/api)
 [![REST API](https://img.shields.io/badge/REST_API-green.svg)](https://api.nexray.web.id)
 
