@@ -1,7 +1,7 @@
 {
-  "name": "@nexray/api",
-  "version": "1.0.0",
-  "description": "Official NexRay API Client - CJS & ESM Support",
+  "name": "api-nexray",
+  "version": "1.0.1",
+  "description": "NexRay API client",
   "main": "./index.js",
   "module": "./src/esm.js",
   "exports": {
@@ -14,20 +14,19 @@
     "test": "node test-cjs.js && node test-esm.mjs"
   },
   "keywords": [
-    "nexray", 
-    "api", 
-    "client", 
-    "cjs", 
+    "nexray",
+    "api",
+    "client",
+    "cjs",
     "esm"
   ],
   "author": "ElrayyXml",
   "license": "MIT",
   "dependencies": {
-    "axios": "latest"
+    "axios": "^1.13.2"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/ElrayyXml/nexray-api.git"
+  "publishConfig": {
+    "access": "public"
   },
-  "homepage": "https://nexray.web.id"
+  "homepage": "https://www.npmjs.com/package/api-nexray"
 }

@@ -2,7 +2,7 @@
 
 <div align="center">
 
-### @nexray/api
+### api-nexray
 
 </div>
 
@@ -20,9 +20,9 @@
 
 <div align="center">
 
-[![npm version](https://img.shields.io/npm/v/@nexray/api.svg)](https://www.npmjs.com/package/@nexray/api)
+[![npm version](https://img.shields.io/npm/v/api-nexray.svg)](https://www.npmjs.com/package/api-nexray)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![npm downloads](https://img.shields.io/npm/dt/@nexray/api.svg?color=blueviolet&label=Downloads&logo=npm)](https://www.npmjs.com/package/@nexray/api)
+[![npm downloads](https://img.shields.io/npm/dt/api-nexray.svg?color=blueviolet&label=Downloads&logo=npm)](https://www.npmjs.com/package/api-nexray)
 [![REST API](https://img.shields.io/badge/REST_API-green.svg)](https://api.nexray.web.id)
 
 </div>
@@ -50,15 +50,15 @@
 #### Installation
 Use the stable version:
 ```bash
-npm install @nexray/api
+npm install api-nexray
 # or
-yarn add @nexray/api
+yarn add api-nexray
 ```
 
 #### package.json
 ```json
 "dependencies": {
-  "@nexray/api": "latest"
+  "api-nexray": "latest"
 }
 ```
 
@@ -66,9 +66,9 @@ yarn add @nexray/api
 
 #### Request
 ```ts
-const nexray = require('@nexray/api');
-# or
-import nexray from '@nexray/api';
+const nexray = require('api-nexray');
+or
+import nexray from 'api-nexray';
 
 const data = await nexray.get('/ai/gemini', {
               text: 'Halo apa kabar...'
@@ -89,14 +89,12 @@ const data = await nexray.get('/ai/gemini', {
 
 #### Request Buffer
 ```ts
-const nexray = require('@nexray/api');
-# or
-import nexray from '@nexray/api';
+const nexray = require('api-nexray');
+or
+import nexray from 'api-nexray';
 
 const buffer = await nexray.getBuffee('/maker/brat', {
               text: 'Halo apa kabar...'
               }
        );
-       
-       console.log(data)
 ```
