@@ -67,7 +67,7 @@ yarn add api-nexray
 #### Request
 ```ts
 const nexray = require('api-nexray');
-or
+# or
 import nexray from 'api-nexray';
 
 const data = await nexray.get('/ai/gemini', {
@@ -90,7 +90,7 @@ const data = await nexray.get('/ai/gemini', {
 #### Request Buffer
 ```ts
 const nexray = require('api-nexray');
-or
+# or
 import nexray from 'api-nexray';
 
 const buffer = await nexray.getBuffer('/maker/brat', {
