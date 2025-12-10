@@ -93,7 +93,7 @@ const nexray = require('api-nexray');
 or
 import nexray from 'api-nexray';
 
-const buffer = await nexray.getBuffee('/maker/brat', {
+const buffer = await nexray.getBuffer('/maker/brat', {
               text: 'Halo apa kabar...'
               }
        );
