@@ -1,101 +1,109 @@
 const axios = require('axios');
-const config = require('../config.json');
-const utils = require('./utils');
+const config = require('./config.json');
 
-class NexRayAPI {
-  constructor() {
-    this.client = axios.create({
-      baseURL: config.baseURL,
-      headers: utils.getHeaders()
-    });
-  }
-
-  async get(endpoint, params = {}) {
-    try {
-      const response = await this.client.get(
-        utils.formatEndpoint(endpoint),
-        { params }
-      );
-      return response.data;
-    } catch (error) {
-      return utils.handleError(error);
+const options = {
+    baseURL: config.baseURL,
+    timeout: config.timeout,
+    maxRetries: config.maxRetries,
+    headers: {
+        'User-Agent': config.userAgent,
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
     }
-  }
+};
 
-  async post(endpoint, data = {}) {
-    try {
-      const response = await this.client.post(
-        utils.formatEndpoint(endpoint),
-        data
-      );
-      return response.data;
-    } catch (error) {
-      return utils.handleError(error);
-    }
-  }
+const client = axios.create();
 
-  async put(endpoint, data = {}) {
-    try {
-      const response = await this.client.put(
-        utils.formatEndpoint(endpoint),
-        data
-      );
-      return response.data;
-    } catch (error) {
-      return utils.handleError(error);
-    }
-  }
+client.defaults.baseURL = options.baseURL;
+client.defaults.timeout = options.timeout;
+client.defaults.headers.common = options.headers;
 
-  async delete(endpoint, params = {}) {
-    try {
-      const response = await this.client.delete(
-        utils.formatEndpoint(endpoint),
-        { params }
-      );
-      return response.data;
-    } catch (error) {
-      return utils.handleError(error);
-    }
-  }
-
-  async patch(endpoint, data = {}) {
-    try {
-      const response = await this.client.patch(
-        utils.formatEndpoint(endpoint),
-        data
-      );
-      return response.data;
-    } catch (error) {
-      return utils.handleError(error);
-    }
-  }
-
-  async getBuffer(endpoint, params = {}) {
-    try {
-      const response = await this.client.get(
-        utils.formatEndpoint(endpoint),
-        { 
-          params, 
-          responseType: 'arraybuffer' 
+client.interceptors.response.use(
+    (response) => response,
+    async (error) => {
+        const originalRequest = error.config;
+        if (!originalRequest || !options.maxRetries) {
+            return Promise.reject(error);
         }
-      );
-      return Buffer.from(response.data);
-    } catch (error) {
-      throw utils.handleError(error);
+        originalRequest.__retryCount = originalRequest.__retryCount || 0;
+        if (originalRequest.__retryCount >= options.maxRetries) {
+            return Promise.reject(error);
+        }
+        originalRequest.__retryCount += 1;
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        return client(originalRequest);
     }
-  }
+);
 
-  setToken(token) {
-    this.client.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-  }
+const formatEndpoint = (endpoint) => {
+    return endpoint.startsWith('/') ? endpoint.slice(1) : endpoint;
+};
 
-  setHeader(key, value) {
-    this.client.defaults.headers.common[key] = value;
-  }
+const handleError = (error) => {
+    const result = {
+        status: false,
+        author: config.author
+    };
 
-  removeHeader(key) {
-    delete this.client.defaults.headers.common[key];
-  }
-}
+    if (error.response) {
+        const status = error.response.status;
+        if (status === 500) {
+            result.error = '500 Internal Server Error - Server encountered an error';
+        } else if (status === 400) {
+            result.error = '400 Bad Request - Invalid parameters or missing required fields';
+        } else {
+            result.error = error.response.data.message || error.message;
+        }
+    } else {
+        result.error = error.message || 'Network Error';
+    }
 
-module.exports = NexRayAPI;
+    return result;
+};
+
+const nexray = {
+    setOptions: (newOptions = {}) => {
+        if (newOptions.baseURL) client.defaults.baseURL = newOptions.baseURL;
+        if (newOptions.timeout) client.defaults.timeout = newOptions.timeout;
+        if (newOptions.maxRetries !== undefined) options.maxRetries = newOptions.maxRetries;
+        if (newOptions.headers) {
+            client.defaults.headers.common = {
+                ...client.defaults.headers.common,
+                ...newOptions.headers
+            };
+        }
+    },
+
+    get: async (endpoint, params = {}) => {
+        try {
+            const response = await client.get(formatEndpoint(endpoint), { params });
+            return response.data;
+        } catch (error) {
+            return handleError(error);
+        }
+    },
+
+    post: async (endpoint, data = {}) => {
+        try {
+            const response = await client.post(formatEndpoint(endpoint), data);
+            return response.data;
+        } catch (error) {
+            return handleError(error);
+        }
+    },
+
+    getBuffer: async (endpoint, params = {}) => {
+        try {
+            const response = await client.get(formatEndpoint(endpoint), {
+                params,
+                responseType: 'arraybuffer'
+            });
+            return Buffer.from(response.data);
+        } catch (error) {
+            return handleError(error);
+        }
+    }
+};
+
+module.exports = nexray;
+module.exports.default = nexray;
