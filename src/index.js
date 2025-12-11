@@ -3,7 +3,6 @@ const config = require('./config.json');
 
 const options = {
     baseURL: config.baseURL,
-    timeout: config.timeout,
     maxRetries: config.maxRetries,
     headers: {
         'User-Agent': config.userAgent,
@@ -15,7 +14,6 @@ const options = {
 const client = axios.create();
 
 client.defaults.baseURL = options.baseURL;
-client.defaults.timeout = options.timeout;
 client.defaults.headers.common = options.headers;
 
 client.interceptors.response.use(
