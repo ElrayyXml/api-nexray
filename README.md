@@ -98,7 +98,7 @@ console.log(data);
 ```bash
 {
   "status": true,
-  "author": "NexRay",
+  "author": "@nexray - ElrayyXml",
   "result": "Halo! Kabar saya baik, terima kasih telah bertanya. Ada yang bisa saya bantu hari ini?"
 }
 ```
@@ -150,7 +150,7 @@ console.log(buffer);
 ```bash
 {
   "status": false,
-  "author": "NexRay",
+  "author": "@nexray - ElrayyXml",
   "error": "400 Bad Request - Invalid parameters or missing required fields"
 }
 ```
@@ -159,7 +159,7 @@ console.log(buffer);
 ```bash
 {
   "status": false,
-  "author": "NexRay",
+  "author": "@nexray - ElrayyXml",
   "error": "500 Internal Server Error - Server encountered an error"
 }
 ```
