@@ -12,7 +12,7 @@
 
 <p><em>Api NexRay</em></p>
 
-<img src="https://files.catbox.moe/ehdrm3.jpg" width="300" alt="Cover" />
+<img src="https://api.nexray.eu.cc/og-image.jpg" width="300" alt="Cover" />
 
 </div>
 
@@ -23,7 +23,7 @@
 [![npm version](https://img.shields.io/npm/v/api-nexray.svg)](https://www.npmjs.com/package/api-nexray)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![npm downloads](https://img.shields.io/npm/dt/api-nexray.svg?color=blueviolet&label=Downloads&logo=npm)](https://www.npmjs.com/package/api-nexray)
-[![REST API](https://img.shields.io/badge/REST_API-green.svg)](https://api.nexray.web.id)
+[![REST API](https://img.shields.io/badge/REST_API-green.svg)](https://api.nexray.eu.cc)
 
 </div>
 
